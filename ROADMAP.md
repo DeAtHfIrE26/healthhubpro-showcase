@@ -53,13 +53,15 @@ rest. A shared hook would let components branch on it, not just soften.
 - **Done when** the hook re-renders on change, `useCountUp` uses it, and the
   test covers a mid-flight toggle.
 
-### 5. Publish the playground
+### 5. Publish the playground — _in progress_
 
-The playground is built by CI (`npm run build:playground`) but is not hosted,
-so the README's demo is a GIF rather than something you can click.
+`.github/workflows/playground.yml` builds and deploys it to GitHub Pages on
+every push to `main`. It is waiting on one repository setting: **Settings →
+Pages → Build and deployment → Source: GitHub Actions**. Until that is on, the
+workflow finishes green and says so in the job summary rather than failing.
 
-- Add a Pages deploy job to `.github/workflows/ci.yml` on `main`.
-- **Done when** the README's "Live Demo" badge points at a running playground.
+- **Done when** Pages is enabled, the workflow publishes, and the README links
+  the running playground beside the GIF.
 
 ## Not planned
 
