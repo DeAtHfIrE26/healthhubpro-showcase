@@ -55,15 +55,11 @@ rest. A shared hook would let components branch on it, not just soften.
 - **Done when** the hook re-renders on change, `useCountUp` uses it, and the
   test covers a mid-flight toggle.
 
-### 5. Publish the playground — _in progress_
+### 5. Publish the playground — _done_
 
-`.github/workflows/playground.yml` builds and deploys it to GitHub Pages on
-every push to `main`. It is waiting on one repository setting: **Settings →
-Pages → Build and deployment → Source: GitHub Actions**. Until that is on, the
-workflow finishes green and says so in the job summary rather than failing.
-
-- **Done when** Pages is enabled, the workflow publishes, and the README links
-  the running playground beside the GIF.
+Live at **https://deathfire26.github.io/healthhubpro-showcase/**, rebuilt and redeployed by
+`.github/workflows/playground.yml` on every push to `main`. The README links
+it beside the GIF.
 
 ## Not planned
 

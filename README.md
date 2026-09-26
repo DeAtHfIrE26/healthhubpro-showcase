@@ -15,11 +15,12 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6.svg?logo=typescript&logoColor=white)](tsconfig.json)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg?logo=react&logoColor=black)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF.svg?logo=vite&logoColor=white)](https://vite.dev)
+[![Playground](https://img.shields.io/badge/Playground-run%20it%20in%20your%20browser-9ede2a.svg)](https://deathfire26.github.io/healthhubpro-showcase/)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-healthhubproapp.vercel.app-9ede2a.svg)](https://healthhubproapp.vercel.app)
 
 **The parts of a health-tracking app that are worth reading on their own — a chart that replaced 99 kB of charting library with 2 kB, parsers that stream a 300 MB Apple Health export without loading it, and a design system that passes WCAG AA in both themes.**
 
-[**Live Demo**](https://healthhubproapp.vercel.app) · [**Docs**](#table-of-contents) · [**Report Bug**](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/new?template=bug_report.yml) · [**Request Feature**](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/new?template=feature_request.yml)
+[**Playground**](https://deathfire26.github.io/healthhubpro-showcase/) · [**Live Demo**](https://healthhubproapp.vercel.app) · [**Docs**](#table-of-contents) · [**Report Bug**](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/new?template=bug_report.yml) · [**Request Feature**](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/new?template=feature_request.yml)
 
 </div>
 
@@ -56,7 +57,9 @@ Everything in the playground runs on **synthetic data** generated in your browse
 
 ## Demo
 
-A 22-second walkthrough of the playground: metric tiles counting up, goal rings sweeping in, the chart switching metric and range, a tooltip, both parsers running on sample files, and the theme toggle.
+**[Open the playground →](https://deathfire26.github.io/healthhubpro-showcase/)** — every component below, running on synthetic data, deployed from `main` on each push.
+
+A 22-second walkthrough of the same thing: metric tiles counting up, goal rings sweeping in, the chart switching metric and range, a tooltip, both parsers running on sample files, and the theme toggle.
 
 <div align="center">
   <img src="assets/demo.gif" alt="Walkthrough of the playground: stat tiles, goal rings, the activity chart switching between metrics and ranges, the Apple Health and CSV parsers running, and the light/dark theme toggle" width="100%">
