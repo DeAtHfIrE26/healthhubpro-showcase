@@ -40,20 +40,38 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # enablement: true turns Pages on the first time this runs, so the
-      # repository needs no manual setup.
+      # enablement: true switches Pages on by itself where the workflow token
+      # is allowed to; on a repository where Pages has never been configured it
+      # is not, and the API answers "Resource not accessible by integration".
+      # That is a one-time setting, not a build failure, so the run stays green
+      # and says what to turn on. The moment Pages is enabled this becomes a
+      # real deploy with no change to this file.
       - name: Configure Pages
+        id: pages
+        continue-on-error: true
         uses: actions/configure-pages@v5
         with:
           enablement: true
 
+      - name: Pages is not enabled yet
+        if: steps.pages.outcome != 'success'
+        run: |
+          echo "::notice title=GitHub Pages is off::Settings -> Pages -> Build and deployment -> Source: GitHub Actions. The next push then publishes the playground."
+          echo '### Playground not published' >> "$GITHUB_STEP_SUMMARY"
+          echo '' >> "$GITHUB_STEP_SUMMARY"
+          echo 'GitHub Pages is not enabled on this repository, and the workflow token may not enable it.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Turn it on under **Settings -> Pages -> Build and deployment -> Source: GitHub Actions**.' >> "$GITHUB_STEP_SUMMARY"
+
       - name: Build playground
+        if: steps.pages.outcome == 'success'
         run: npm run build:playground
 
-      - uses: actions/upload-pages-artifact@v3
+      - if: steps.pages.outcome == 'success'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist-playground
 
       - name: Deploy
         id: deployment
+        if: steps.pages.outcome == 'success'
         uses: actions/deploy-pages@v4
