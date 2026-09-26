@@ -54,10 +54,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      # This repository ships no credentials and never should. The scan runs
-      # over the full history so a secret cannot be quietly added and then
-      # amended away.
-      - name: gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # This repository ships no credentials and never should, and the scan has
+      # to cover the whole history so one cannot be added and then amended away.
+      #
+      # gitleaks-action used to do this, but on a push it scans only the pushed
+      # range, derived as `<first pushed commit>^..<last>`. When that first
+      # commit is a root commit — pushing a new branch, or any history that
+      # starts fresh — `^` has no parent, git exits non-zero and the job fails
+      # having scanned nothing. Running gitleaks directly over `--all` is both
+      # immune to that and actually what the comment above claimed.
+      - name: Install gitleaks
+        run: |
+          set -euo pipefail
+          tag=$(curl -fsSL https://api.github.com/repos/gitleaks/gitleaks/releases/latest \
+                | python3 -c 'import json,sys; print(json.load(sys.stdin)["tag_name"])')
+          echo "gitleaks $tag"
+          curl -fsSL "https://github.com/gitleaks/gitleaks/releases/download/${tag}/gitleaks_${tag#v}_linux_x64.tar.gz" \
+            | tar -xz -C /usr/local/bin gitleaks
+          gitleaks version
+
+      - name: Scan the full history
+        run: gitleaks git . --log-opts=--all --redact --no-banner --verbose
