@@ -1,0 +1,59 @@
+# Publishes the playground to GitHub Pages on every push to main.
+#
+# `base: './'` in vite.playground.config.ts keeps every asset path relative, so
+# the same build works at a domain root or under /healthhubpro-showcase/.
+name: Playground
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, and never cancel one midway: a half-finished Pages
+# deploy leaves the site on the previous build with no way to tell from outside.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # enablement: true turns Pages on the first time this runs, so the
+      # repository needs no manual setup.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Build playground
+        run: npm run build:playground
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-playground
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
