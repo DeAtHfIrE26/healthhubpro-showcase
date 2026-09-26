@@ -3,10 +3,12 @@
 Where this is going, and the ideas that are genuinely open. Anything marked
 **good first issue** is scoped so that a first contribution can be complete
 rather than partial — each names the files to touch and how to tell it worked.
+The numbered items below are filed as issues; the link goes to the one to
+comment on before starting.
 
 ## Next
 
-### 1. Line and area marks for `ActivityChart` — _good first issue_
+### 1. Line and area marks for `ActivityChart` — _good first issue_ ([#1](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/1))
 
 The chart only draws bars. Sleep and water read better as a line, and the
 bar-scaling code already computes everything a line needs.
@@ -18,7 +20,7 @@ bar-scaling code already computes everything a line needs.
 - **Done when** `mark="line"` renders in the playground at 7, 14 and 30 days
   with no layout shift, and `ActivityChart.test.tsx` covers both marks.
 
-### 2. A Google Fit `.zip` adapter — _good first issue_
+### 2. A Google Fit `.zip` adapter — _good first issue_ ([#3](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/3))
 
 `detectFormat` handles `.xml`, `.csv`, `.tsv` and `.txt`. Google Fit's
 "Takeout" export is a zip of CSVs.
@@ -29,7 +31,7 @@ bar-scaling code already computes everything a line needs.
 - **Done when** a zip of two daily CSVs parses to the merged day set, and the
   chunk-boundary guarantee still holds for the files inside.
 
-### 3. Timezone-aware day bucketing
+### 3. Timezone-aware day bucketing ([#4](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/4))
 
 Both parsers bucket by the date string in the source record. An Apple Health
 export written in one timezone and read in another can shift a day at the
@@ -42,7 +44,7 @@ boundary.
 - **Done when** a record at 23:30 +1300 lands on a defensible date with a test
   that states which rule was chosen.
 
-### 4. A `useReducedMotion` hook — _good first issue_
+### 4. A `useReducedMotion` hook — _good first issue_ ([#2](https://github.com/DeAtHfIrE26/healthhubpro-showcase/issues/2))
 
 `useCountUp` reads `prefers-reduced-motion` directly and the CSS handles the
 rest. A shared hook would let components branch on it, not just soften.
